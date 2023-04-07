@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+	<xs:element name="philosophers">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="philosopher" type="philosopherType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element> 
+	
+	<xs:complexType name="philosopherType">
+		<xs:sequence>
+			<xs:element name="personalInfo" type="personalInfoType" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="tags" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="books" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="book" type="bookType" minOccurs="1" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="quotes" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="quote" minOccurs="1" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:all>
+									<xs:element name="text" type="longString" minOccurs="1" maxOccurs="1"/>
+								</xs:all>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="group">
+			<xs:simpleType>
+				<xs:restriction base="shortString">
+					<xs:enumeration value="presokratycy"/>
+					<xs:enumeration value="sokratycy"/>
+					<xs:enumeration value="pozostali"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="personalInfoType">
+		<xs:group ref="personalInfoGroup"/>
+	</xs:complexType>
+
+	<xs:group name="personalInfoGroup">
+		<xs:sequence>
+			<xs:element name="fullName" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType mixed="true">
+					<xs:sequence>
+						<xs:element name="shortName" type="shortString"/>
+					</xs:sequence>
+					<xs:attribute name="lang" type="xs:language" use="required"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="birth" type="dateType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="death" type="dateType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="birthplace" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="shortString">
+							<xs:attribute ref="country" use="optional"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="image" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="shortString">
+							<xs:attribute ref="source" use="required"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="wikipedia" type="wikipediaType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="bookType">
+		<xs:all>
+			<xs:element name="title" type="shortString"/>
+			<xs:element name="description">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="0"/>
+						<xs:maxLength value="1000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="availableInLibraries">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="libraryQuantity" minOccurs="1" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="libraryQuantityType">
+										<xs:attribute name="name" type="longString" use="required"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="wikipedia" type="wikipediaType"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="wikipediaType">
+		<xs:choice>
+			<xs:element name="plLink" type="link" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="enLink" type="link" minOccurs="1" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="link">
+		<xs:attribute ref="source" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="dateType">
+		<xs:simpleContent>
+			<xs:extension base="yearInteger">
+				<xs:attribute name="era">
+					<xs:simpleType>
+						<xs:restriction base="veryShortString">
+							<xs:enumeration value="BC"/>
+							<xs:enumeration value="AD"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:simpleType name="libraryQuantityType">
+		<xs:union>
+			<xs:simpleType>
+				<xs:restriction base="shortString">
+					<xs:enumeration value="Brak"/>
+					<xs:enumeration value="Brak danych"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:integer">
+					<xs:minInclusive value="1"/>
+					<xs:maxInclusive value="10"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+
+	<xs:simpleType name="yearInteger">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="2020"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="veryShortString">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="shortString">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="longString">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="quoteText">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[^\s]?"/>
+			<xs:pattern value="[^\s].*[^\s]"/>
+		</xs:restriction>
+    </xs:simpleType>
+
+	<xs:attribute name="source" type="xs:anyURI"/>
+
+	<xs:attribute name="country" type="shortString"/>
+
+	<xs:element name="tags">
+		<xs:simpleType>
+			<xs:list>
+				<xs:simpleType>
+					<xs:restriction base="longString">
+						<xs:minLength value="5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:list>
+		</xs:simpleType>		
+	</xs:element>
+</xs:schema>

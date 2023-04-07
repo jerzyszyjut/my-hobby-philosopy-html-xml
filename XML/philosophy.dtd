@@ -1,0 +1,38 @@
+<!ENTITY % era 'era (AD|BC) "AD"'>
+<!ENTITY % atLeastOneWikipedia 'wikipedia+'>
+<!ENTITY % wikipediaLinks 'plLink|enLink'>
+<!ELEMENT philosophers (philosopher)+>
+<!ATTLIST philosophers
+        xmlns:xsi CDATA #REQUIRED
+        xsi:noNamespaceSchemaLocation CDATA #REQUIRED
+>
+<!ELEMENT philosopher (personalInfo,tags,books?,quotes?)>
+<!ATTLIST philosopher group CDATA #REQUIRED>
+<!ELEMENT personalInfo (fullName+,birth+,death?,birthplace+,image+,%atLeastOneWikipedia;)>
+<!ELEMENT wikipedia (%wikipediaLinks;)+>
+<!ELEMENT plLink EMPTY>
+<!ATTLIST plLink source CDATA #REQUIRED>
+<!ELEMENT enLink EMPTY>
+<!ATTLIST enLink source CDATA #REQUIRED>
+<!ELEMENT fullName (#PCDATA|shortName)*>
+<!ATTLIST fullName lang CDATA "pl">
+<!ELEMENT shortName (#PCDATA)>
+<!ELEMENT birth (#PCDATA)>
+<!ATTLIST birth %era;>
+<!ELEMENT death (#PCDATA)>
+<!ATTLIST death %era;>
+<!ELEMENT birthplace (#PCDATA)>
+<!ATTLIST birthplace country CDATA #IMPLIED>
+<!ELEMENT image (#PCDATA)>
+<!ATTLIST image source CDATA #REQUIRED>
+<!ELEMENT quotes (quote*)>
+<!ELEMENT tags (#PCDATA)>
+<!ELEMENT books (book*)>
+<!ELEMENT book (title+,description+,availableInLibraries+,%atLeastOneWikipedia;)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT availableInLibraries (libraryQuantity*)>
+<!ELEMENT libraryQuantity (#PCDATA)>
+<!ATTLIST libraryQuantity name CDATA #REQUIRED>
+<!ELEMENT quote (text+)>
+<!ELEMENT text (#PCDATA)>

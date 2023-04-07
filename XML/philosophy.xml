@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE philosophers SYSTEM "philosophy.dtd">
+<philosophers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="philosophy.xsd">
+    <philosopher group="presokratycy">
+        <personalInfo>
+            <fullName lang="pl">
+                <shortName>Pitagoras</shortName> z Samos
+            </fullName>
+            <fullName lang="en">
+                <shortName>Pythagoras</shortName>
+            </fullName>
+            <birth era="BC">570</birth>
+            <death era="BC">495</death>
+            <birthplace country="Greece">Samos</birthplace>
+            <image source="./images/pitagoras.jpg">Pitagoras painting</image>
+            <wikipedia>
+                <plLink source="https://pl.wikipedia.org/wiki/Pitagoras"/>
+            </wikipedia>
+        </personalInfo>
+        <tags>
+            liczba
+            kosmos
+            misteria orfickie
+        </tags>
+    </philosopher>
+    <philosopher group="sokratycy">
+        <personalInfo>
+            <fullName lang="pl">
+                <shortName>Platon</shortName>
+            </fullName>
+            <fullName lang="en">
+                <shortName>Plato</shortName>
+            </fullName>
+            <birth era="BC">428</birth>
+            <death era="BC">348</death>
+            <birthplace country="Greece">Ateny</birthplace>
+            <image source="./images/platon.jpg">Platon painting</image>
+            <wikipedia>
+                <plLink source="https://pl.wikipedia.org/wiki/Platon"/>
+            </wikipedia>
+        </personalInfo>
+        <tags>
+            dialog
+            idealizm
+            jaskinia platona
+        </tags>
+        <books>
+            <book>
+                <title>Dialogi</title>
+                <description>
+                    Dialogi to zbiór 36 dialogów, w których Platon przedstawia swoje poglądy na temat filozofii, nauki, polityki, etyki, religii, a także filozofii matematyki.
+                </description>
+                <availableInLibraries>
+                    <libraryQuantity name="Prywatny księgozbiór">Brak</libraryQuantity>
+                    <libraryQuantity name="Biblioteka PG">2</libraryQuantity>
+                </availableInLibraries>
+                <wikipedia>
+                    <enLink source="https://en.wikipedia.org/wiki/Dialogues_of_Plato"/>
+                </wikipedia>
+            </book>
+        </books>
+        <quotes>
+            <quote>
+                <text>
+                    "Wiedza to wiedza, że nic nie wiemy."
+                </text>
+            </quote>
+        </quotes>
+    </philosopher>
+    <philosopher group="pozostali">
+        <personalInfo>
+            <fullName lang="pl">
+                Fryderyk 
+                <shortName>Nietzsche</shortName>
+            </fullName>
+            <fullName lang="en">
+                Friedrich <shortName>Nietzsche</shortName>
+            </fullName>
+            <birth era="AD">1844</birth>
+            <death era="AD">1900</death>
+            <birthplace country="Germany">Röcken</birthplace>
+            <image source="./images/nietzsche.jpg">Nietzsche painting</image>
+            <wikipedia>
+                <plLink source="https://pl.wikipedia.org/wiki/Fryderyk_Nietzsche"/>
+            </wikipedia>
+        </personalInfo>
+        <tags>
+            egzystencjalizm
+            nihilizm
+            dekadencja
+            nadczłowiek
+        </tags>
+        <books>
+            <book>
+                <title>Antychryst</title>
+                <description>
+                    Antychryst to książka Friedricha Nietzschego, w której autor przedstawia swoje poglądy na temat chrześcijaństwa, jego wad i zalet.
+                </description>
+                <availableInLibraries>
+                    <libraryQuantity name="Prywatny księgozbiór">Brak</libraryQuantity>
+                    <libraryQuantity name="Biblioteka PG">1</libraryQuantity>
+                </availableInLibraries>
+                <wikipedia>
+                    <enLink source="https://en.wikipedia.org/wiki/The_Antichrist_(book)"/>
+                </wikipedia>
+            </book>
+        </books>
+        <quotes>
+            <quote>
+                <text>
+                    "Gott ist tot"
+                </text>
+            </quote>
+        </quotes>
+    </philosopher>
+</philosophers>
